@@ -12,15 +12,17 @@ export const path = {
     js: `${buildFolder}/js/`,
     css: `${buildFolder}/css/`,
     html: `${buildFolder}/`,
+    fonts: `${buildFolder}/fonts`,
     files: `${buildFolder}/files/`
   }, //build iles path
   src: {
     images: `${srcFolder}/img/**/*.{jpg, jpeg, png, gif, webp}`,
     svg: `${srcFolder}/img/**/*.svg`,
     js: `${srcFolder}/js/index.js`,
-    scss: `${srcFolderssss}/scss/style.scss`,
+    scss: `${srcFolder}/scss/style.scss`,
     html: `${srcFolder}/*.pug`, //If you use Pug, change to *.pug, if HTML, then .html
     files: `${srcFolder}/files/**/*.*`,
+    svgicons: `${srcFolder}/svgicons/*.svg`,
   }, //source files path
   watch: {
     images: `${srcFolder}/img/**/*.{jpg, jpeg, png, gif, webp, ico, svg}`,

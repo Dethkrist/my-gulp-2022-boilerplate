@@ -2,7 +2,7 @@ import webpack from 'webpack-stream';
 
 
 export const js = () => {
-  return app.gulp.src(app.path.src.js, { sourcemaps: true }) 
+  return app.gulp.src(app.path.src.js, { sourcemaps: app.isDev }) 
   //Sourcemaps needed to track which file where from, useful, when we have error
     .pipe(app.plugins.plumber(
       app.plugins.notify.onError({
@@ -11,7 +11,7 @@ export const js = () => {
       })
     ))
     .pipe(webpack({
-      mode: 'development',
+      mode: app.isBuild ? 'production' : 'development',
       output: {
         filename: 'index.min.js',
       }

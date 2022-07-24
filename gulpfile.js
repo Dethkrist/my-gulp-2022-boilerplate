@@ -8,6 +8,8 @@ import { plugins } from "./gulp/config/plugins.js";
 
 // Set values to global variable
 global.app = {
+  isBuild: process.argv.includes('--build'),
+  isDev: !process.argv.includes('--build'),
   path: path,
   gulp: gulp,
   plugins: plugins,
@@ -21,6 +23,10 @@ import { server } from "./gulp/tasks/server.js";
 import { scss } from "./gulp/tasks/scss.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
+import { otfToTtf, ttfToWoff, fontsStyle } from "./gulp/tasks/fonts.js";
+import { svgSprive } from "./gulp/tasks/svgSprive.js";
+import { zip } from "./gulp/tasks/zip.js";
+import { ftp } from "./gulp/tasks/ftp.js";
 
 // Create watcher to detect changes in our files
 function watcher() {
@@ -31,11 +37,24 @@ function watcher() {
   gulp.watch(path.watch.images, images);
 }
 
+export { svgSprive }
+
+// Font processing
+const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle);
+
 // Connecting parallel tasks for copying files and html
-const mainTasks = gulp.parallel(copy, html, scss, js, images);
+const mainTasks = gulp.series(fonts, gulp.parallel(copy, html, scss, js, images));
 const watchServer = gulp.parallel(watcher, server);
 // Creating a task scenarios
 const dev = gulp.series(reset, mainTasks, watchServer);
+const build = gulp.series(reset, mainTasks); //It's for build, we don't need watcher here, and server too
+const deployZip = gulp.series(reset, mainTasks, zip);
+const deployFTP = gulp.series(reset, mainTasks, ftp);
+
+export {dev};
+export {build};
+export {deployZip};
+export {deployFTP};
 
 // Completing task as default
 gulp.task('default', dev);

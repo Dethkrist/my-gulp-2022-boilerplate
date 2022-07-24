@@ -30,11 +30,11 @@ import { ftp } from "./gulp/tasks/ftp.js";
 
 // Create watcher to detect changes in our files
 function watcher() {
-  gulp.watch(path.watch.files, copy);
-  gulp.watch(path.watch.html, html);
-  gulp.watch(path.watch.scss, scss);
-  gulp.watch(path.watch.js, js);
-  gulp.watch(path.watch.images, images);
+  gulp.watch(path.watch.files, copy); // if you want to instant send changes to FTP, replace copy to "gulp.series(html,ftp)"
+  gulp.watch(path.watch.html, html); // if you want to instant send changes to FTP, replace html to "gulp.series(html,ftp)"
+  gulp.watch(path.watch.scss, scss); // if you want to instant send changes to FTP, replace scss to "gulp.series(html,ftp)"
+  gulp.watch(path.watch.js, js); // if you want to instant send changes to FTP, replace js to "gulp.series(html,ftp)"
+  gulp.watch(path.watch.images, images); // if you want to instant send changes to FTP, replace images to "gulp.series(html,ftp)
 }
 
 export { svgSprive }

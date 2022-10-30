@@ -1,6 +1,6 @@
 ## My GULP 2022 boilerplate
 
-### This is a standard GULP boilerplate, used for work with regular non-complicated sites and markup.
+## This is a standard GULP boilerplate, used for work with regular non-complicated sites and markup.
 
 Good and easy for newbies or normal developers, it can:
 
